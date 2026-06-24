@@ -89,6 +89,7 @@
     </nav>
     <div class="container">
     <h1><?= $editing ? "Modifier l'employé $emp_no" : "Ajouter un employé" ?></h1>
+    <p><a href="index.php">&larr; Retour aux départements</a></p>
     <?php if ($success) { ?>
         <p style="color:green;">Enregistré.
            <a href="fiche.php?emp_no=<?= urlencode($emp_no) ?>">Voir la fiche &rarr;</a></p>

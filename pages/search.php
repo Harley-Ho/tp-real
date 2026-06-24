@@ -31,6 +31,7 @@
         </nav>
         <div class="container">
             <h1>Recherche d'employés</h1>
+            <p><a href="index.php">&larr; Retour aux départements</a></p>
             <div class="card">
                 <form action="search.php" method="get">
                     <div class="form-group">

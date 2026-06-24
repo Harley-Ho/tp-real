@@ -51,6 +51,7 @@
         </nav>
         <div class="container">
             <h1><?= $editing ? "Modifier le département $dept_no" : "Ajouter un département" ?></h1>
+            <p><a href="index.php">&larr; Retour aux départements</a></p>
             <?php if ($success) { ?>
                 <div class="alert alert-success">Enregistré.</div>
             <?php } ?>

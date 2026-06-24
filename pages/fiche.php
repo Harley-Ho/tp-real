@@ -30,12 +30,11 @@
         </ul>
     </nav>
     <div class="container">
-   
-
     <?php if (!$employee) { ?>
         <h1>Employé introuvable</h1>
     <?php } else { ?>
         <h1><?= $employee['first_name'] ?> <?= $employee['last_name'] ?></h1>
+        <p><a href="javascript:history.back()">&larr; Retour</a></p>
         <table class="table">
             <tr><th>N°</th>              <td><?= $employee['emp_no'] ?></td></tr>
             <tr><th>Prénom</th>          <td><?= $employee['first_name'] ?></td></tr>

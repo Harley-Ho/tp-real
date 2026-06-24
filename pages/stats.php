@@ -21,7 +21,7 @@
     </nav>
     <div class="container">
     <h1>Statistiques par emploi</h1>
-
+    <p><a href="index.php">&larr; Retour aux départements</a></p>
     <table class="table">
         <thead>
         <tr>

@@ -42,6 +42,7 @@
             <h1>Département introuvable</h1>
             <?php } else { ?>
                 <h1>Employés du département <?= $department['dept_name'] ?> (<?= $department['dept_no'] ?>)</h1>
+                <p><a href="index.php">&larr; Retour aux départements</a></p>
                 <table class="table">
                     <thead>
                         <tr>

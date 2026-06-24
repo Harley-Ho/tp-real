@@ -50,7 +50,7 @@
         <h1>Cet employé n'a pas de département actuel.</h1>
     <?php } else { ?>
         <h1><?= $employee['first_name'] ?> <?= $employee['last_name'] ?> — devenir manager de <?= $current_dept['dept_name'] ?></h1>
-
+        <p><a href="fiche.php?emp_no=<?= urlencode($emp_no) ?>">&larr; Retour à la fiche</a></p>
         <?php if ($success) { ?>
             <div class="alert alert-success">C'est fait : l'employé est désormais le manager du département.
                <a href="index.php">Vérifier dans la liste des départements &rarr;</a></div>
