@@ -84,6 +84,7 @@
             <li><a href="search.php">Rechercher</a></li>
             <li><a href="stats.php">Statistiques</a></li>
             <li><a href="emp_form.php" class="active">Ajouter un employé</a></li>
+            <li><a href="dept_form.php">Ajouter un departement</a></li>
         </ul>
     </nav>
     <div class="container">
