@@ -22,7 +22,7 @@
     <nav class="navbar">
         <ul>
             <li class="brand">Employés DB</li>
-            <li><a href="index.php" class="active">Départements</a></li>
+            <li><a href="index.php">Départements</a></li>
             <li><a href="search.php">Rechercher</a></li>
             <li><a href="stats.php">Statistiques</a></li>
             <li><a href="emp_form.php">Ajouter un employé</a></li>
