@@ -14,10 +14,22 @@
 ?>
 <html>
     <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../design/theme-dark/style.css">
         <title>Fiche employé</title>
     </head>
     <body>
-    <p><a href="javascript:history.back()">&larr; Retour</a></p>
+    <nav class="navbar">
+        <ul>
+            <li class="brand">Employés DB</li>
+            <li><a href="index.php" class="active">Départements</a></li>
+            <li><a href="search.php">Rechercher</a></li>
+            <li><a href="stats.php">Statistiques</a></li>
+            <li><a href="emp_form.php">Ajouter un employé</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+   
 
     <?php if (!$employee) { ?>
         <h1>Employé introuvable</h1>
@@ -32,7 +44,7 @@
         <p><a href="emp_form.php?emp_no=<?= urlencode($employee['emp_no']) ?>">
             <button type="button">Modifier l'employé</button>
         </a></p>
-        <table border="1">
+        <table class="table">
             <tr><th>N°</th>              <td><?= $employee['emp_no'] ?></td></tr>
             <tr><th>Prénom</th>          <td><?= $employee['first_name'] ?></td></tr>
             <tr><th>Nom</th>             <td><?= $employee['last_name'] ?></td></tr>
@@ -55,7 +67,7 @@
         </table>
 
         <h2>Historique des emplois</h2>
-        <table border="1">
+        <table class="table">
             <tr>
                 <th>Poste</th>
                 <th>Du</th>
@@ -71,7 +83,7 @@
         </table>
 
         <h2>Historique des salaires</h2>
-        <table border="1">
+        <table class="table">
             <tr>
                 <th>Salaire</th>
                 <th>Du</th>
@@ -86,5 +98,6 @@
             <?php } ?>
         </table>
     <?php } ?>
+    </div>
     </body>
 </html>
