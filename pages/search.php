@@ -60,29 +60,34 @@
                 </form>
             </div>
         </div>
-
-    <?php if ($submitted) { ?>
-        <h2><?= count($results) ?> résultat(s)<?= count($results) === 200 ? ' (limité à 200)' : '' ?></h2>
-        <table border="1">
-            <tr>
-                <th>N°</th>
-                <th>Prénom</th>
-                <th>Nom</th>
-                <th>Genre</th>
-                <th>Âge</th>
-                <th>Département</th>
-            </tr>
-            <?php foreach ($results as $emp) { ?>
-                <tr>
-                    <td><a href="fiche.php?emp_no=<?= urlencode($emp['emp_no']) ?>"><?= $emp['emp_no'] ?></a></td>
-                    <td><?= $emp['first_name'] ?></td>
-                    <td><?= $emp['last_name'] ?></td>
-                    <td><?= $emp['gender'] ?></td>
-                    <td><?= $emp['age'] ?></td>
-                    <td><?= $emp['dept_name'] ?></td>
+        <div class="container">
+            <?php if ($submitted) { ?>
+            <h2><?= count($results) ?> résultat(s)<?= count($results) === 200 ? ' (limité à 200)' : '' ?></h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th>N°</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Genre</th>
+                    <th>Âge</th>
+                    <th>Département</th>
                 </tr>
-            <?php } ?>
-        </table>
-    <?php } ?>
+                </thead>
+                <tbody>
+                    <?php foreach ($results as $emp) { ?>
+                    <tr>
+                        <td><a href="fiche.php?emp_no=<?= urlencode($emp['emp_no']) ?>"><?= $emp['emp_no'] ?></a></td>
+                        <td><?= $emp['first_name'] ?></td>
+                        <td><?= $emp['last_name'] ?></td>
+                        <td><?= $emp['gender'] ?></td>
+                        <td><?= $emp['age'] ?></td>
+                        <td><?= $emp['dept_name'] ?></td>
+                    </tr>
+                <?php } ?>
+                </tbody>
+            </table>
+        <?php } ?>
+        </div>
     </body>
 </html>
