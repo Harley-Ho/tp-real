@@ -16,28 +16,50 @@
 <html>
     <head>
         <title>Recherche d'employés</title>
+        <link rel="stylesheet" href="../design/theme-dark/style.css">
     </head>
     <body>
-    <p><a href="index.php">&larr; Retour aux départements</a></p>
-    <h1>Recherche d'employés</h1>
-
-    <form method="get" action="search.php">
-        <p>
-            Département :
-            <select name="dept_no">
-                <option value="">— Tous —</option>
-                <?php foreach ($departments as $d) { ?>
-                    <option value="<?= $d['dept_no'] ?>" <?= $dept_no === $d['dept_no'] ? 'selected' : '' ?>>
-                        <?= $d['dept_name'] ?>
-                    </option>
-                <?php } ?>
-            </select>
-        </p>
-        <p>Nom de l'employé : <input type="text" name="name" value="<?= htmlspecialchars($name) ?>"></p>
-        <p>Âge min : <input type="number" name="age_min" value="<?= htmlspecialchars($age_min) ?>"></p>
-        <p>Âge max : <input type="number" name="age_max" value="<?= htmlspecialchars($age_max) ?>"></p>
-        <p><input type="submit" value="Rechercher"></p>
-    </form>
+        <nav class="navbar">
+            <ul>
+                <li class="brand">Employés DB</li>
+                <li><a href="index.php">Départements</a></li>
+                <li><a href="#" class="active">Rechercher</a></li>
+                <li><a href="stats.php">Statistiques</a></li>
+                <li><a href="emp_form.php">Ajouter un employé</a></li>
+                <li><a href="dept_form.php">Ajouter un departement</a></li>
+            </ul>
+        </nav>
+        <div class="container">
+            <h1>Recherche d'employés</h1>
+            <div class="card">
+                <form action="search.php" method="get">
+                    <div class="form-group">
+                        <label for="dept_no">Departement</label>
+                        <select class="form-control" name="dept_no">
+                            <option value="">— Tous —</option>
+                            <?php foreach ($departments as $d) { ?>
+                                <option value="<?= $d['dept_no'] ?>" <?= $dept_no === $d['dept_no'] ? 'selected' : '' ?>>
+                                    <?= $d['dept_name'] ?>
+                                </option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Nom de l'employé</label>
+                        <input class="form-control" type="text" name="name" value="<?= htmlspecialchars($name) ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="age_min">Âge min</label>
+                        <input class="form-control" type="number" name="age_min" value="<?= htmlspecialchars($age_min) ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="age_max">Âge max</label>
+                        <input class="form-control" type="number" name="age_max" value="<?= htmlspecialchars($age_max) ?>">
+                    </div>
+                    <button type="submit" class="btn">Rechercher</button>
+                </form>
+            </div>
+        </div>
 
     <?php if ($submitted) { ?>
         <h2><?= count($results) ?> résultat(s)<?= count($results) === 200 ? ' (limité à 200)' : '' ?></h2>

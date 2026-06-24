@@ -36,16 +36,26 @@
 <html>
     <head>
         <title><?= $editing ? "Modifier" : "Ajouter" ?> un département</title>
+        <link rel="stylesheet" href="../design/theme-dark/style.css">
     </head>
     <body>
-    <p><a href="index.php">&larr; Retour aux départements</a></p>
+        <nav class="navbar">
+            <ul>
+                <li class="brand">Employés DB</li>
+                <li><a href="index.php">Départements</a></li>
+                <li><a href="search.php">Rechercher</a></li>
+                <li><a href="stats.php">Statistiques</a></li>
+                <li><a href="emp_form.php">Ajouter un employé</a></li>
+                <li><a href="dept_form.php" class="active">Ajouter un departement</a></li>
+            </ul>
+        </nav>
     <h1><?= $editing ? "Modifier le département $dept_no" : "Ajouter un département" ?></h1>
 
     <?php if ($success) { ?>
-        <p style="color:green;">Enregistré.</p>
+        <div class="alert alert-success">Enregistré.</div>
     <?php } ?>
     <?php if ($error !== '') { ?>
-        <p style="color:red;"><?= htmlspecialchars($error) ?></p>
+        <div class="alert alert-error"><?= htmlspecialchars($error) ?></div>
     <?php } ?>
 
     <form method="post" action="dept_form.php<?= $editing ? '?dept_no=' . urlencode($dept_no) : '' ?>">
