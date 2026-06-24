@@ -72,12 +72,22 @@
 ?>
 <html>
     <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../design/theme-dark/style.css">
         <title><?= $editing ? "Modifier" : "Ajouter" ?> un employé</title>
     </head>
     <body>
-    <p><a href="index.php">&larr; Retour aux départements</a></p>
+        <nav class="navbar">
+        <ul>
+            <li class="brand">Employés DB</li>
+            <li><a href="index.php">Départements</a></li>
+            <li><a href="search.php">Rechercher</a></li>
+            <li><a href="stats.php">Statistiques</a></li>
+            <li><a href="emp_form.php" class="active">Ajouter un employé</a></li>
+        </ul>
+    </nav>
+    <div class="container">
     <h1><?= $editing ? "Modifier l'employé $emp_no" : "Ajouter un employé" ?></h1>
-
     <?php if ($success) { ?>
         <p style="color:green;">Enregistré.
            <a href="fiche.php?emp_no=<?= urlencode($emp_no) ?>">Voir la fiche &rarr;</a></p>
@@ -86,21 +96,22 @@
         <p style="color:red;"><?= htmlspecialchars($error) ?></p>
     <?php } ?>
 
+    <div class="card">
     <form method="post" action="emp_form.php<?= $editing ? '?emp_no=' . urlencode($emp_no) : '' ?>">
         <input type="hidden" name="mode" value="<?= $editing ? 'edit' : 'add' ?>">
-        <p>Numéro : <input type="number" name="emp_no" value="<?= htmlspecialchars($emp_no) ?>" <?= $editing ? 'readonly' : '' ?>></p>
-        <p>Prénom : <input type="text" name="first_name" value="<?= htmlspecialchars($first_name) ?>"></p>
-        <p>Nom : <input type="text" name="last_name" value="<?= htmlspecialchars($last_name) ?>"></p>
+        <p>Numéro : <input class="form-control" type="number" name="emp_no" value="<?= htmlspecialchars($emp_no) ?>" <?= $editing ? 'readonly' : '' ?>></p>
+        <p>Prénom : <input class="form-control" type="text" name="first_name" value="<?= htmlspecialchars($first_name) ?>"></p>
+        <p>Nom : <input class="form-control" type="text" name="last_name" value="<?= htmlspecialchars($last_name) ?>"></p>
         <p>Genre :
-            <select name="gender">
+            <select class="form-control" name="gender">
                 <option value="M" <?= $gender === 'M' ? 'selected' : '' ?>>M</option>
                 <option value="F" <?= $gender === 'F' ? 'selected' : '' ?>>F</option>
             </select>
         </p>
-        <p>Date de naissance : <input type="date" name="birth_date" value="<?= htmlspecialchars($birth_date) ?>"></p>
-        <p>Date d'embauche : <input type="date" name="hire_date" value="<?= htmlspecialchars($hire_date) ?>"></p>
+        <p>Date de naissance : <input class="form-control" type="date" name="birth_date" value="<?= htmlspecialchars($birth_date) ?>"></p>
+        <p>Date d'embauche : <input class="form-control" type="date" name="hire_date" value="<?= htmlspecialchars($hire_date) ?>"></p>
         <p>Département :
-            <select name="dept_no">
+            <select class="form-control" name="dept_no">
                 <option value="">— Choisir —</option>
                 <?php foreach ($departments as $d) { ?>
                     <option value="<?= $d['dept_no'] ?>" <?= $dept_no === $d['dept_no'] ? 'selected' : '' ?>>
@@ -115,7 +126,9 @@
                 Est manager de ce département
             </label>
         </p>
-        <p><input type="submit" value="<?= $editing ? 'Modifier' : 'Ajouter' ?>"></p>
+        <p><input class="btn" type="submit" value="<?= $editing ? 'Modifier' : 'Ajouter' ?>"></p>
     </form>
+    </div>
+    </div>
     </body>
 </html>

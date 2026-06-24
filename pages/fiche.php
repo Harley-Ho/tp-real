@@ -35,15 +35,6 @@
         <h1>Employé introuvable</h1>
     <?php } else { ?>
         <h1><?= $employee['first_name'] ?> <?= $employee['last_name'] ?></h1>
-        <p><a href="change_dept.php?emp_no=<?= urlencode($employee['emp_no']) ?>">
-            <button type="button">Changer de département</button>
-        </a></p>
-        <p><a href="become_manager.php?emp_no=<?= urlencode($employee['emp_no']) ?>">
-            <button type="button">Devenir Manager</button>
-        </a></p>
-        <p><a href="emp_form.php?emp_no=<?= urlencode($employee['emp_no']) ?>">
-            <button type="button">Modifier l'employé</button>
-        </a></p>
         <table class="table">
             <tr><th>N°</th>              <td><?= $employee['emp_no'] ?></td></tr>
             <tr><th>Prénom</th>          <td><?= $employee['first_name'] ?></td></tr>
@@ -98,6 +89,15 @@
             <?php } ?>
         </table>
     <?php } ?>
+    <p><a class="btn" href="change_dept.php?emp_no=<?= urlencode($employee['emp_no']) ?>">
+            Changer de département
+        </a>
+        <a class="btn" href="become_manager.php?emp_no=<?= urlencode($employee['emp_no']) ?>">
+            Devenir Manager
+        </a>
+        <a class="btn" href="emp_form.php?emp_no=<?= urlencode($employee['emp_no']) ?>">
+            Modifier l'employé
+        </a></p>
     </div>
     </body>
 </html>
