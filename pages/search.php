@@ -27,10 +27,12 @@
                 <li><a href="stats.php">Statistiques</a></li>
                 <li><a href="emp_form.php">Ajouter un employé</a></li>
                 <li><a href="dept_form.php">Ajouter un departement</a></li>
+                <li><a href="modif_sal.php">Modifier salaire</a></li>
             </ul>
         </nav>
         <div class="container">
             <h1>Recherche d'employés</h1>
+            <p><a href="index.php">&larr; Retour aux départements</a></p>
             <div class="card">
                 <form action="search.php" method="get">
                     <div class="form-group">
@@ -62,7 +64,7 @@
         </div>
         <div class="container">
             <?php if ($submitted) { ?>
-            <h2><?= count($results) ?> résultat(s)<?= count($results) === 200 ? ' (limité à 200)' : '' ?></h2>
+            <h2><?= count($results) ?> résultat(s)</h2>
             <table class="table">
                 <thead>
                     <tr>

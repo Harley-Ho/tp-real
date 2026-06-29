@@ -17,7 +17,6 @@
     --space:    16px;
     --max-width: 1000px;
 }
-
 * { box-sizing: border-box; }
 body {
     margin: 0;
@@ -32,7 +31,7 @@ h1, h2, h3 { color: #f3f4f6; }
 
 .container { max-width: var(--max-width); margin: 0 auto; padding: var(--space); }
 
-.navbar { background: var(--color-surface); border-bottom: 1px solid var(--color-border); padding: 0 var(--space); }
+.navbar { background: var(--color-surface); border-bottom: 1px solid var(--color-border); padding: 5 var(--space);  }
 .navbar ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
 .navbar .brand { color: #fff; font-weight: 700; padding-right: var(--space); }
 .navbar a { display: inline-block; padding: 12px var(--space); color: var(--color-muted); border-radius: var(--radius); }

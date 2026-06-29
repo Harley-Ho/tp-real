@@ -2,7 +2,6 @@
 include_once 'connection.php';
 
 function get_all_lines($sql){
-    //echo $sql;
     $req = mysqli_query(dbconnect(),$sql );
     if (!$req) {
         die('Erreur SQL : ' . mysqli_error(dbconnect()));
@@ -65,6 +64,18 @@ function get_jobs_stats()
             GROUP BY t.title
             ORDER BY t.title";
     return get_all_lines($sql);
+}
+function get_avg_stats(){
+    $sql = "SELECT AVG(salaire_moyen)       AS moyenne_general
+            FROM(SELECT
+                   AVG(s.salary)       AS salaire_moyen
+            FROM titles t
+            INNER JOIN salaries s
+                    ON s.emp_no = t.emp_no
+                   AND s.to_date = '9999-01-01'
+            WHERE t.to_date = '9999-01-01'
+            GROUP BY t.title)AS stats";
+    return get_one_line($sql);
 }
 
 // Exécute une requête qui ne renvoie pas de résultat (INSERT, UPDATE, DELETE)
@@ -173,21 +184,21 @@ function update_department($dept_no, $dept_name)
     execute_query($sql);
 }
 
-function add_employee($emp_no, $birth_date, $first_name, $last_name, $gender, $hire_date)
+function add_employee($emp_no, $birth_date, $first_name, $last_name, $gender, $hire_date, $telephone)
 {
-    $sql = "INSERT INTO employees (emp_no, birth_date, first_name, last_name, gender, hire_date)
-            VALUES ('%s', '%s', '%s', '%s', '%s', '%s')";
-    $sql = sprintf($sql, $emp_no, $birth_date, $first_name, $last_name, $gender, $hire_date);
+    $sql = "INSERT INTO employees (emp_no, birth_date, first_name, last_name, gender, hire_date, telephone)
+            VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')";
+    $sql = sprintf($sql, $emp_no, $birth_date, $first_name, $last_name, $gender, $hire_date, $telephone);
     execute_query($sql);
 }
 
-function update_employee($emp_no, $birth_date, $first_name, $last_name, $gender, $hire_date)
+function update_employee($emp_no, $birth_date, $first_name, $last_name, $gender, $hire_date, $telephone)
 {
     $sql = "UPDATE employees
             SET birth_date = '%s', first_name = '%s', last_name = '%s',
-                gender = '%s', hire_date = '%s'
+                gender = '%s', hire_date = '%s', telephone = '%s'
             WHERE emp_no = '%s'";
-    $sql = sprintf($sql, $birth_date, $first_name, $last_name, $gender, $hire_date, $emp_no);
+    $sql = sprintf($sql, $birth_date, $first_name, $last_name, $gender, $hire_date, $telephone, $emp_no);
     execute_query($sql);
 }
 
@@ -218,6 +229,7 @@ function get_employees_by_department($dept_no, $limit, $offset)
                    e.first_name,
                    e.last_name,
                    e.gender,
+                   e.telephone,
                    e.hire_date
             FROM employees e
             INNER JOIN dept_emp de
@@ -251,6 +263,7 @@ function get_one_employee($emp_no)
                    e.gender,
                    e.birth_date,
                    e.hire_date,
+                   e.telephone,
                    d.dept_no,
                    d.dept_name,
                    t.title,
@@ -303,7 +316,6 @@ function search_employees($dept_no, $name, $age_min, $age_max)
     // ⚠️ sprintf n'échappe pas : injection SQL toujours possible (à sécuriser avec une requête préparée).
     // On construit la clause WHERE dynamiquement selon les champs remplis.
     $conditions = array();
-
     if ($dept_no !== '') {
         $conditions[] = sprintf("de.dept_no = '%s'", $dept_no);
     }
@@ -334,8 +346,7 @@ function search_employees($dept_no, $name, $age_min, $age_max)
             INNER JOIN departments d
                     ON d.dept_no = de.dept_no
             WHERE $where
-            ORDER BY e.last_name, e.first_name
-            LIMIT 200";
+            ORDER BY e.last_name, e.first_name";
     return get_all_lines($sql);
 }
 
@@ -348,4 +359,14 @@ function get_title_history($emp_no)
             ORDER BY from_date DESC";
     $sql = sprintf($sql, $emp_no);
     return get_all_lines($sql);
+}
+
+function set_salaries($pourcentage){
+        //fin des salaires
+        $sql_update="UPDATE salaries SET to_date=CURRENT_DATE WHERE to_date='9999-01-01'";
+        execute_query($sql_update);
+
+        //insertion des nouveaux
+        $sql_insert="INSERT INTO salaries(emp_no,salary,from_date,to_date) SELECT emp_no,salary+(salary*".$pourcentage."/100),CURRENT_DATE,'9999-01-01' FROM salaries WHERE to_date=CURRENT_DATE ON DUPLICATE KEY UPDATE salary=VALUES(salary),to_date='9999-01-01'";
+        execute_query($sql_insert);
 }

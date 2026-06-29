@@ -35,6 +35,7 @@
                 <li><a href="stats.php">Statistiques</a></li>
                 <li><a href="emp_form.php">Ajouter un employé</a></li>
                 <li><a href="dept_form.php">Ajouter un departement</a></li>
+                <li><a href="modif_sal.php">Modifier salaire</a></li>
             </ul>
         </nav>
         <div class="container">
@@ -42,6 +43,7 @@
             <h1>Département introuvable</h1>
             <?php } else { ?>
                 <h1>Employés du département <?= $department['dept_name'] ?> (<?= $department['dept_no'] ?>)</h1>
+                <p><a href="index.php">&larr; Retour aux départements</a></p>
                 <table class="table">
                     <thead>
                         <tr>
@@ -49,6 +51,7 @@
                             <th>Prénom</th>
                             <th>Nom</th>
                             <th>Genre</th>
+                            <th>Telephone</th>
                             <th>Date d'embauche</th>
                         </tr>
                     </thead>
@@ -59,6 +62,7 @@
                                 <td><?= $emp['first_name'] ?></td>
                                 <td><?= $emp['last_name'] ?></td>
                                 <td><?= $emp['gender'] ?></td>
+                                <td><?= $emp['telephone'] ?></td>
                                 <td><?= $emp['hire_date'] ?></td>
                             </tr>
                         <?php } ?>

@@ -22,19 +22,20 @@
     <nav class="navbar">
         <ul>
             <li class="brand">Employés DB</li>
-            <li><a href="index.php" class="active">Départements</a></li>
+            <li><a href="index.php">Départements</a></li>
             <li><a href="search.php">Rechercher</a></li>
             <li><a href="stats.php">Statistiques</a></li>
             <li><a href="emp_form.php">Ajouter un employé</a></li>
+            <li><a href="dept_form.php">Ajouter un departement</a></li>
+            <li><a href="modif_sal.php">Modifier salaire</a></li>
         </ul>
     </nav>
     <div class="container">
-   
-
     <?php if (!$employee) { ?>
         <h1>Employé introuvable</h1>
     <?php } else { ?>
         <h1><?= $employee['first_name'] ?> <?= $employee['last_name'] ?></h1>
+        <p><a href="javascript:history.back()">&larr; Retour</a></p>
         <table class="table">
             <tr><th>N°</th>              <td><?= $employee['emp_no'] ?></td></tr>
             <tr><th>Prénom</th>          <td><?= $employee['first_name'] ?></td></tr>
@@ -44,6 +45,7 @@
             <tr><th>Date d'embauche</th> <td><?= $employee['hire_date'] ?></td></tr>
             <tr><th>Poste actuel</th>    <td><?= $employee['title'] ?? '—' ?></td></tr>
             <tr><th>Département</th>      <td><?= $employee['dept_name'] ?? '—' ?></td></tr>
+            <tr><th>Telephone</th>      <td><?= $employee['telephone'] ?? '—' ?></td></tr>
             <tr><th>Salaire actuel</th>  <td><?= isset($employee['salary']) ? number_format($employee['salary'], 0, ',', ' ') . ' €' : '—' ?></td></tr>
             <tr><th>Emploi le plus long</th>
                 <td>

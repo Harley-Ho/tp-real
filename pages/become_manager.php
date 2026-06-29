@@ -28,35 +28,49 @@
 ?>
 <html>
     <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../design/theme-dark/style.css">
         <title>Devenir manager</title>
     </head>
     <body>
-    <p><a href="fiche.php?emp_no=<?= urlencode($emp_no) ?>">&larr; Retour à la fiche</a></p>
-
+    <nav class="navbar">
+        <ul>
+            <li class="brand">Employés DB</li>
+            <li><a href="index.php">Départements</a></li>
+            <li><a href="search.php">Rechercher</a></li>
+            <li><a href="statistics.php">Statistiques</a></li>
+            <li><a href="add_employee.php">Ajouter un employé</a></li>
+            <li><a href="dept_form.php">Ajouter un departement</a></li>
+            <li><a href="modif_sal.php">Modifier salaire</a></li>
+        </ul>
+    </nav>
+    <div class="container">
     <?php if (!$employee) { ?>
         <h1>Employé introuvable</h1>
     <?php } elseif (!$current_dept) { ?>
         <h1>Cet employé n'a pas de département actuel.</h1>
     <?php } else { ?>
         <h1><?= $employee['first_name'] ?> <?= $employee['last_name'] ?> — devenir manager de <?= $current_dept['dept_name'] ?></h1>
-
+        <p><a href="fiche.php?emp_no=<?= urlencode($emp_no) ?>">&larr; Retour à la fiche</a></p>
         <?php if ($success) { ?>
-            <p style="color:green;">C'est fait : l'employé est désormais le manager du département.
-               <a href="index.php">Vérifier dans la liste des départements &rarr;</a></p>
+            <div class="alert alert-success">C'est fait : l'employé est désormais le manager du département.
+               <a href="index.php">Vérifier dans la liste des départements &rarr;</a></div>
         <?php } ?>
         <?php if ($error !== '') { ?>
-            <p style="color:red;"><?= htmlspecialchars($error) ?></p>
+            <div class="alert alert-error"><?= htmlspecialchars($error) ?></div>
         <?php } ?>
 
         <!-- b. Manager en cours affiché en haut -->
         <p><strong>Manager en cours :</strong>
             <?= $manager ? $manager['manager_name'] . ' (depuis le ' . $manager['from_date'] . ')' : 'aucun' ?>
         </p>
-
+        <div class="card">
         <form method="post" action="become_manager.php?emp_no=<?= urlencode($emp_no) ?>">
-            <p>Date de début : <input type="date" name="from_date"></p>
-            <p><input type="submit" value="Devenir manager"></p>
+            <p>Date de début : <input class="form-control" type="date" name="from_date"></p>
+            <p><input class="btn" type="submit" value="Devenir manager"></p>
         </form>
+        </div>
     <?php } ?>
+    </div>
     </body>
 </html>
